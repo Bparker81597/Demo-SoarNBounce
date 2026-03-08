@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BookingSystem from '../components/BookingSystem';
+---
+
+<Layout title="Book Your Visit | Soar N Bounce Grandville">
+  <div class="relative overflow-hidden">
+    <!-- Decorative background blobs -->
+    <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2 z-0"></div>
+    <div class="absolute bottom-0 right-0 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-[150px] translate-x-1/3 translate-y-1/3 z-0"></div>
+    
+    <div class="relative z-10">
+      <BookingSystem client:load />
+    </div>
+  </div>
+</Layout>
