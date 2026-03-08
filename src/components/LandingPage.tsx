@@ -13,12 +13,42 @@ const QUICK_ACTIONS = [
 ];
 
 const ATTRACTIONS = [
-  { name: 'Main Court', desc: 'Wall-to-wall trampolines for maximum air.', color: 'primary' },
-  { name: 'Foam Pit', desc: 'Test your tricks with a soft landing.', color: 'accent' },
-  { name: 'Dodgeball', desc: 'High-flying team sports action.', color: 'secondary' },
-  { name: 'Ninja Course', desc: 'Test your strength and agility.', color: 'primary' },
-  { name: 'Kids Area', desc: 'Safe fun for our smallest jumpers.', color: 'accent' },
-  { name: 'Climbing Area', desc: 'Reach new heights on our vertical walls.', color: 'secondary' },
+  { 
+    name: 'Main Court', 
+    desc: 'The ultimate wall-to-wall trampoline experience for all skill levels.', 
+    color: 'primary',
+    img: 'https://images.unsplash.com/photo-1518112391480-981ef0f2cbb6?auto=format&fit=crop&q=80&w=800' 
+  },
+  { 
+    name: 'Dodgeball', 
+    desc: 'Take the classic game to new heights with trampoline team challenges.', 
+    color: 'orange-500',
+    img: 'https://images.unsplash.com/photo-1552674605-db6ffd4facb5?auto=format&fit=crop&q=80&w=800' 
+  },
+  { 
+    name: 'Ninja Course', 
+    desc: 'Test your strength, balance, and speed on our elite obstacle course.', 
+    color: 'emerald-500',
+    img: 'https://images.unsplash.com/photo-1594737625785-a6cbd9da23c9?auto=format&fit=crop&q=80&w=800' 
+  },
+  { 
+    name: 'Foam Pit', 
+    desc: 'Perfect your biggest flips and tricks with a safe, soft landing.', 
+    color: 'primary',
+    img: 'https://images.unsplash.com/photo-1566737236500-c8ac43014a67?auto=format&fit=crop&q=80&w=800' 
+  },
+  { 
+    name: 'Go-Karts', 
+    desc: 'High-speed racing action on our professionally designed track.', 
+    color: 'orange-500',
+    img: 'https://images.unsplash.com/photo-1531303435785-3853ba035cda?auto=format&fit=crop&q=80&w=800' 
+  },
+  { 
+    name: 'Virtual Reality', 
+    desc: 'Step into a new dimension with our immersive VR Warship experience.', 
+    color: 'emerald-500',
+    img: 'https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?auto=format&fit=crop&q=80&w=800' 
+  },
 ];
 
 const PRICING_PREVIEW = [
@@ -79,14 +109,12 @@ const TRANSLATIONS: any = {
   }
 };
 
-// --- COMPONENT ---
-
 export default function LandingPage() {
   const [lang, setLang] = useState<'en' | 'es'>('en');
   const t = TRANSLATIONS[lang];
 
   return (
-    <div className="bg-transparent text-gray-900 font-sans overflow-x-hidden">
+    <div className="bg-transparent text-slate-800 dark:text-slate-200 font-sans overflow-x-hidden transition-colors duration-500">
       
       {/* 1. HERO SECTION */}
       <section className="relative min-h-[90vh] flex items-center justify-center pt-20 pb-12 px-6 overflow-hidden">
@@ -96,8 +124,8 @@ export default function LandingPage() {
              alt="Soar N Bounce" 
              className="w-full h-full object-cover"
            />
-           <div className="absolute inset-0 bg-white/40 backdrop-blur-[2px]"></div>
-           <div className="absolute inset-0 bg-gradient-to-t from-[#f8f9fa] via-transparent to-white/20"></div>
+           <div className="absolute inset-0 bg-white/40 dark:bg-slate-950/70 backdrop-blur-[1px]"></div>
+           <div className="absolute inset-0 bg-gradient-to-t from-slate-50 dark:from-[#020617] via-transparent to-white/10 dark:to-slate-900/20"></div>
         </div>
 
         <div className="relative z-10 text-center max-w-5xl mx-auto">
@@ -106,98 +134,98 @@ export default function LandingPage() {
             animate={{ opacity: 1, y: 0 }}
             className="mb-6"
           >
-             <span className="bg-primary text-white px-6 py-2 rounded-full text-xs font-black uppercase tracking-[0.3em] inline-block mb-8 shadow-lg italic">
+             <span className="bg-slate-900 dark:bg-primary text-white px-8 py-2.5 rounded-full text-xs font-black uppercase tracking-[0.3em] inline-block mb-10 shadow-2xl italic">
                📍 {t.locationBadge}
              </span>
-             <h1 className="text-5xl md:text-8xl font-black italic font-headings uppercase tracking-tighter leading-tight mb-6 text-gray-900 drop-shadow-sm">
+             <h1 className="text-5xl md:text-8xl font-black italic font-headings uppercase tracking-tighter leading-[0.9] mb-8 text-slate-900 dark:text-white">
                {t.heroTitle.split('at')[0]} <br/> 
-               <span className="text-primary italic underline decoration-accent/30 underline-offset-8">at</span> <span className="text-accent">Soar N Bounce</span>
+               <span className="text-primary italic underline decoration-orange-500/40 dark:decoration-orange-400/40 underline-offset-8">at</span> <span className="text-orange-500 dark:text-orange-400">Soar N Bounce</span>
              </h1>
-             <p className="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto mb-12 font-bold leading-relaxed">
+             <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto mb-14 font-bold leading-relaxed">
                {t.heroSubtitle}
              </p>
           </motion.div>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <a href={`${SITE_BASE}/book`} className="w-full sm:w-auto bg-primary hover:bg-blue-600 text-white font-black uppercase py-5 px-12 rounded-2xl text-xl transition-all shadow-2xl shadow-primary/30 hover:scale-105 active:scale-95 italic">
+            <a href={`${SITE_BASE}/book`} className="w-full sm:w-auto bg-primary hover:bg-blue-600 text-white font-black uppercase py-6 px-14 rounded-3xl text-xl transition-all shadow-2xl shadow-primary/30 hover:scale-105 active:scale-95 italic tracking-tight">
               {t.bookBtn}
             </a>
-            <a href={`${SITE_BASE}/waiver`} className="w-full sm:w-auto bg-accent hover:bg-orange-600 text-white font-black uppercase py-5 px-12 rounded-2xl text-xl transition-all shadow-2xl shadow-accent/30 hover:scale-105 active:scale-95 italic">
+            <a href={`${SITE_BASE}/waiver`} className="w-full sm:w-auto bg-slate-900 dark:bg-white hover:bg-black dark:hover:bg-slate-100 text-white dark:text-slate-900 font-black uppercase py-6 px-14 rounded-3xl text-xl transition-all shadow-2xl hover:scale-105 active:scale-95 italic tracking-tight">
               {t.waiverBtn}
             </a>
           </div>
         </div>
-
-        {/* Language Toggle */}
-        <div className="absolute top-8 right-8 z-50">
-           <button 
-             onClick={() => setLang(lang === 'en' ? 'es' : 'en')}
-             className="bg-white border border-gray-200 shadow-xl px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-gray-50 transition-all flex items-center gap-2 text-gray-900"
-           >
-             🌐 {lang === 'en' ? 'Español' : 'English'}
-           </button>
-        </div>
       </section>
 
       {/* 2. QUICK ACTION GRID */}
-      <section className="max-w-7xl mx-auto px-6 -mt-20 relative z-20 pb-24">
-         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <section className="max-w-7xl mx-auto px-6 -mt-24 relative z-20 pb-32">
+         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {QUICK_ACTIONS.map((action, i) => (
               <a 
                 key={i}
                 href={action.link}
-                className="group bg-white border border-gray-100 p-8 rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all hover:-translate-y-2 flex flex-col items-center text-center"
+                className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-12 rounded-[3.5rem] shadow-xl hover:shadow-2xl transition-all hover:-translate-y-3 flex flex-col items-center text-center"
               >
-                <div className="text-4xl mb-6 group-hover:scale-125 transition-transform duration-500">{action.icon}</div>
-                <h3 className={`text-xl font-black uppercase tracking-tighter mb-2 text-gray-900 group-hover:text-primary transition-colors`}>{action.title}</h3>
-                <p className="text-gray-500 text-sm font-bold">{action.desc}</p>
+                <div className="text-6xl mb-8 group-hover:scale-125 transition-transform duration-500">{action.icon}</div>
+                <h3 className={`text-xl font-black uppercase tracking-tighter mb-3 text-slate-900 dark:text-white group-hover:text-primary transition-colors`}>{action.title}</h3>
+                <p className="text-slate-400 dark:text-slate-500 text-sm font-bold leading-relaxed">{action.desc}</p>
               </a>
             ))}
          </div>
       </section>
 
       {/* 3. TODAY’S INFO STRIP */}
-      <section className="bg-white border-y border-gray-100 py-8 px-6 mb-24">
-         <div className="max-w-7xl mx-auto flex flex-wrap justify-center md:justify-between items-center gap-8 text-xs font-black uppercase tracking-[0.2em] text-gray-500">
-            <div className="flex items-center gap-3">
-               <span className="text-secondary text-lg">🕒</span>
-               <span>{t.infoStrip.hours}</span>
+      <section className="bg-white dark:bg-slate-950 border-y border-slate-200 dark:border-slate-900 py-12 px-6 mb-32 shadow-sm">
+         <div className="max-w-7xl mx-auto flex flex-wrap justify-center md:justify-between items-center gap-12 text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 dark:text-slate-600">
+            <div className="flex items-center gap-4">
+               <span className="text-secondary text-2xl">🕒</span>
+               <span className="text-slate-900 dark:text-slate-300 tracking-widest">{t.infoStrip.hours}</span>
             </div>
-            <div className="flex items-center gap-3">
-               <span className="text-primary text-lg">📝</span>
-               <span>{t.infoStrip.waiver}</span>
+            <div className="flex items-center gap-4">
+               <span className="text-primary text-2xl">📝</span>
+               <span className="text-slate-900 dark:text-slate-300 tracking-widest">{t.infoStrip.waiver}</span>
             </div>
-            <div className="flex items-center gap-3">
-               <span className="text-accent text-lg">🧦</span>
-               <span>{t.infoStrip.socks}</span>
+            <div className="flex items-center gap-4">
+               <span className="text-orange-500 dark:text-orange-400 text-2xl">🧦</span>
+               <span className="text-slate-900 dark:text-slate-300 tracking-widest">{t.infoStrip.socks}</span>
             </div>
-            <div className="flex items-center gap-3">
-               <span className="text-lg">📍</span>
-               <span>Grandville, MI</span>
+            <div className="flex items-center gap-4">
+               <span className="text-2xl">📍</span>
+               <span className="text-slate-900 dark:text-slate-300 tracking-widest uppercase">Grandville, MI</span>
             </div>
          </div>
       </section>
 
       {/* 4. ATTRACTIONS SECTION */}
-      <section id="attractions" className="max-w-7xl mx-auto px-6 pb-32">
-         <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-6xl font-black italic font-headings uppercase tracking-tighter mb-4 text-gray-900">
-              Epic <span className="text-primary">Attractions</span>
+      <section id="attractions" className="max-w-7xl mx-auto px-6 pb-40">
+         <div className="text-center mb-24">
+            <h2 className="text-5xl md:text-8xl font-black italic font-headings uppercase tracking-tighter mb-8 text-slate-900 dark:text-white leading-none">
+              Grandville <br/> <span className="text-primary italic underline decoration-orange-500/30 dark:decoration-orange-400/30 underline-offset-8">Attractions</span>
             </h2>
-            <div className="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+            <div className="w-24 h-2 bg-primary mx-auto rounded-full"></div>
          </div>
 
-         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             {ATTRACTIONS.map((item, i) => (
-              <div key={i} className="group relative aspect-square rounded-[3rem] overflow-hidden bg-white border border-gray-100 shadow-xl hover:shadow-2xl transition-all">
-                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-10 opacity-60 group-hover:opacity-80 transition-opacity"></div>
-                 <div className="absolute inset-0 flex items-center justify-center opacity-5 font-black italic text-4xl text-gray-900">{item.name.toUpperCase()}</div>
-                 <img src={`${SITE_BASE}/images/hero-header.png`} alt={item.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              <div key={i} className="group flex flex-col bg-white dark:bg-slate-900 rounded-[4rem] overflow-hidden border border-slate-200 dark:border-slate-800 shadow-lg dark:shadow-2xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-4">
+                 <div className="aspect-[4/3] overflow-hidden relative">
+                    <div className="absolute inset-0 bg-slate-900/10 dark:bg-slate-950/40 group-hover:bg-transparent transition-colors z-10"></div>
+                    <img 
+                      src={item.img} 
+                      alt={item.name} 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" 
+                    />
+                    <div className={`absolute top-8 left-8 z-20 bg-slate-900 dark:bg-primary text-white px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-2xl italic`}>
+                       Must See
+                    </div>
+                 </div>
                  
-                 <div className="absolute bottom-0 left-0 p-8 z-20">
-                    <h3 className={`text-2xl font-black italic uppercase mb-2 text-white`}>{item.name}</h3>
-                    <p className="text-gray-200 text-sm mb-6 font-bold">{item.desc}</p>
-                    <button className="text-xs font-black uppercase tracking-widest border-b-2 border-white/20 pb-1 hover:border-white transition-all text-white">Learn More</button>
+                 <div className="p-12 flex flex-col flex-1">
+                    <h3 className={`text-3xl font-black italic uppercase mb-4 text-slate-900 dark:text-white`}>{item.name}</h3>
+                    <p className="text-slate-500 dark:text-slate-400 text-sm font-bold leading-relaxed mb-10 flex-1">{item.desc}</p>
+                    <a href={`${SITE_BASE}/book`} className={`inline-block w-fit text-[10px] font-black uppercase tracking-[0.3em] py-4 px-10 rounded-full border-2 border-slate-100 dark:border-slate-800 group-hover:border-primary group-hover:bg-primary group-hover:text-white transition-all text-slate-500 dark:text-slate-400 italic`}>
+                       Book Now
+                    </a>
                  </div>
               </div>
             ))}
@@ -205,114 +233,116 @@ export default function LandingPage() {
       </section>
 
       {/* 5. BIRTHDAY PARTIES FEATURE */}
-      <section className="bg-primary/5 py-32 px-6 relative overflow-hidden mb-32 border-y border-primary/10">
-         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
+      <section className="bg-white dark:bg-slate-950 py-40 px-6 relative overflow-hidden mb-40 border-y border-slate-200 dark:border-slate-900">
+         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[150px] -mr-96 -mt-96"></div>
+         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center relative z-10">
             <div>
-               <h2 className="text-5xl md:text-7xl font-black italic font-headings uppercase tracking-tighter mb-8 leading-tight text-gray-900">
+               <h2 className="text-6xl md:text-8xl font-black italic font-headings uppercase tracking-tighter mb-10 leading-[0.9] text-slate-900 dark:text-white">
                  Ultimate <br/>
-                 <span className="text-primary italic underline decoration-accent/30">Birthday Parties</span>
+                 <span className="text-primary italic underline decoration-orange-500/30 underline-offset-8">Birthday Parties</span>
                </h2>
-               <p className="text-2xl font-bold mb-10 text-gray-600 italic">The best celebration in Grandville!</p>
+               <p className="text-2xl font-bold mb-12 text-slate-500 dark:text-slate-400 italic">The best celebration in Grandville!</p>
                
-               <div className="space-y-6 mb-12">
+               <div className="space-y-8 mb-16">
                   {['Reserved party space', 'Jump time included', 'Family-friendly celebration', 'Add-ons available'].map((benefit, i) => (
-                    <div key={i} className="flex items-center gap-4">
-                       <span className="bg-primary text-white p-2 rounded-lg font-black text-sm italic">✔</span>
-                       <span className="text-lg font-bold text-gray-700">{benefit}</span>
+                    <div key={i} className="flex items-center gap-6">
+                       <span className="bg-primary text-white p-3 rounded-2xl font-black text-xs italic shadow-xl">✔</span>
+                       <span className="text-xl font-bold text-slate-700 dark:text-slate-300">{benefit}</span>
                     </div>
                   ))}
                </div>
 
-               <a href={`${SITE_BASE}/book`} className="inline-block bg-primary hover:bg-blue-600 text-white font-black uppercase py-6 px-12 rounded-[2rem] text-xl transition-all shadow-xl shadow-primary/20 hover:scale-105 active:scale-95 italic">
+               <a href={`${SITE_BASE}/book`} className="inline-block bg-primary hover:bg-blue-600 text-white font-black uppercase py-7 px-16 rounded-3xl text-xl transition-all shadow-2xl shadow-primary/30 hover:scale-105 active:scale-95 italic tracking-tight">
                  Plan a Party
                </a>
             </div>
-            <div className="aspect-video bg-white rounded-[4rem] border-8 border-gray-50 shadow-2xl flex items-center justify-center text-primary/10 font-black italic text-4xl">
-               🎉 PARTY IMAGE
+            <div className="aspect-square bg-slate-50 dark:bg-slate-900 rounded-[5rem] border-8 border-white dark:border-slate-800 shadow-2xl flex items-center justify-center text-primary/5 dark:text-white/5 font-black italic text-4xl overflow-hidden relative">
+               <img src={`${SITE_BASE}/images/hero-header.png`} alt="Party" className="absolute inset-0 w-full h-full object-cover opacity-30 dark:opacity-50" />
+               <span className="relative z-10 uppercase tracking-widest drop-shadow-2xl">🎉 PARTY TIME</span>
             </div>
          </div>
       </section>
 
       {/* 6. HOW IT WORKS SECTION */}
-      <section className="max-w-7xl mx-auto px-6 pb-32">
-         <h2 className="text-4xl md:text-5xl font-black italic font-headings uppercase tracking-tighter text-center mb-16 text-gray-900">{t.howItWorks.title}</h2>
-         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <section className="max-w-7xl mx-auto px-6 pb-40">
+         <h2 className="text-4xl md:text-5xl font-black italic font-headings uppercase tracking-tighter text-center mb-24 text-slate-900 dark:text-white leading-none">Simple Step-By-Step</h2>
+         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-16">
             {[t.howItWorks.step1, t.howItWorks.step2, t.howItWorks.step3, t.howItWorks.step4].map((step, i) => (
               <div key={i} className="text-center group">
-                 <div className="w-16 h-16 bg-white text-primary border border-gray-100 shadow-xl rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-black italic group-hover:bg-primary group-hover:text-white transition-all">
+                 <div className="w-24 h-24 bg-white dark:bg-slate-900 text-primary border border-slate-200 dark:border-slate-800 shadow-2xl rounded-[2.5rem] flex items-center justify-center mx-auto mb-10 text-4xl font-black italic group-hover:bg-primary group-hover:text-white transition-all group-hover:-rotate-12 duration-500">
                    {i + 1}
                  </div>
-                 <p className="font-black uppercase tracking-tighter text-lg text-gray-700">{step}</p>
+                 <p className="font-black uppercase tracking-tighter text-xl text-slate-700 dark:text-slate-200 leading-tight">{step}</p>
               </div>
             ))}
          </div>
       </section>
 
       {/* 7. HOURS + PRICING PREVIEW */}
-      <section className="max-w-7xl mx-auto px-6 pb-32 grid grid-cols-1 lg:grid-cols-2 gap-12 text-gray-900">
-         <div className="bg-white border border-gray-100 p-12 rounded-[3.5rem] shadow-xl">
-            <h3 className="text-3xl font-black italic font-headings uppercase tracking-tighter mb-10 text-primary">Operating Hours</h3>
-            <div className="space-y-6">
-               <div className="flex justify-between border-b border-gray-50 pb-4">
-                  <span className="text-gray-400 font-bold uppercase tracking-widest text-xs">Mon - Thu</span>
-                  <span className="font-bold">10 AM – 9 PM</span>
+      <section className="max-w-7xl mx-auto px-6 pb-40 grid grid-cols-1 lg:grid-cols-2 gap-16 text-slate-800 dark:text-slate-200">
+         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-16 md:p-20 rounded-[4rem] shadow-xl">
+            <h3 className="text-4xl font-black italic font-headings uppercase tracking-tighter mb-16 text-primary dark:text-white underline decoration-orange-500/20 underline-offset-8">Open Hours</h3>
+            <div className="space-y-10">
+               <div className="flex justify-between border-b border-slate-100 dark:border-slate-800 pb-6">
+                  <span className="text-slate-400 dark:text-slate-500 font-bold uppercase tracking-widest text-xs">Mon - Thu</span>
+                  <span className="font-black text-xl italic tracking-tight">10 AM – 9 PM</span>
                </div>
-               <div className="flex justify-between border-b border-gray-50 pb-4 font-bold text-primary">
-                  <span className="uppercase tracking-widest text-xs italic">Fri - Sat (Elite Hours)</span>
-                  <span>10 AM – 10 PM</span>
+               <div className="flex justify-between border-b border-slate-100 dark:border-slate-800 pb-6 font-black text-primary italic">
+                  <span className="uppercase tracking-widest text-xs">Fri - Sat (Elite)</span>
+                  <span className="text-xl tracking-tight">10 AM – 10 PM</span>
                </div>
-               <div className="flex justify-between border-b border-gray-50 pb-4">
-                  <span className="text-gray-400 font-bold uppercase tracking-widest text-xs">Sunday</span>
-                  <span className="font-bold">10 AM – 9 PM</span>
+               <div className="flex justify-between border-b border-slate-100 dark:border-slate-800 pb-6">
+                  <span className="text-slate-400 dark:text-slate-500 font-bold uppercase tracking-widest text-xs">Sunday</span>
+                  <span className="font-black text-xl italic tracking-tight">10 AM – 9 PM</span>
                </div>
             </div>
          </div>
 
-         <div className="bg-white border border-gray-100 p-12 rounded-[3.5rem] shadow-xl">
-            <h3 className="text-3xl font-black italic font-headings uppercase tracking-tighter mb-10 text-accent">Jump Pricing</h3>
-            <div className="space-y-4 mb-10">
+         <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-16 md:p-20 rounded-[4rem] shadow-xl">
+            <h3 className="text-4xl font-black italic font-headings uppercase tracking-tighter mb-16 text-orange-500 dark:text-white underline decoration-primary/20 underline-offset-8">Jump Pricing</h3>
+            <div className="space-y-6 mb-16">
                {PRICING_PREVIEW.map((item, i) => (
-                 <div key={i} className="bg-gray-50 p-6 rounded-2xl flex justify-between items-center border border-gray-100">
+                 <div key={i} className="bg-slate-50 dark:bg-slate-950 p-10 rounded-[2.5rem] flex justify-between items-center border border-slate-100 dark:border-slate-800 group hover:bg-white dark:hover:bg-slate-800 hover:border-orange-500 transition-all duration-500">
                     <div>
-                       <p className="font-black uppercase tracking-tight text-lg">{item.type}</p>
-                       <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">{item.duration}</p>
+                       <p className="font-black uppercase tracking-tight text-2xl text-slate-900 dark:text-white italic">{item.type}</p>
+                       <p className="text-[10px] text-slate-400 dark:text-slate-500 font-black uppercase tracking-widest mt-2">{item.duration}</p>
                     </div>
-                    <div className="text-3xl font-black italic text-accent">{item.price}</div>
+                    <div className="text-5xl font-black italic text-orange-500 tabular-nums">{item.price}</div>
                  </div>
                ))}
-               <p className="text-center text-[10px] text-gray-400 uppercase font-black tracking-widest pt-4">Jump Socks required for all participants ($3.50)</p>
+               <p className="text-center text-[10px] text-slate-400 dark:text-slate-500 uppercase font-black tracking-widest pt-8 italic leading-relaxed">Jump Socks required for all participants ($3.50)</p>
             </div>
-            <a href={`${SITE_BASE}/book`} className="block w-full text-center border-2 border-accent/20 hover:border-accent py-4 rounded-2xl font-black uppercase tracking-widest transition-all text-accent italic">
-               View Full Pricing
+            <a href={`${SITE_BASE}/book`} className="block w-full text-center bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-black dark:hover:bg-slate-100 py-6 rounded-3xl font-black uppercase tracking-[0.3em] transition-all shadow-2xl italic text-sm">
+               View Full Rates
             </a>
          </div>
       </section>
 
       {/* 8. WAIVER CALLOUT SECTION */}
-      <section className="max-w-7xl mx-auto px-6 pb-32">
-         <div className="bg-white border border-gray-100 rounded-[4rem] p-12 md:p-24 text-center relative overflow-hidden shadow-xl">
-            <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[100px]"></div>
-            <h2 className="text-4xl md:text-6xl font-black italic font-headings uppercase tracking-tighter mb-8 text-gray-900">Waiver Required</h2>
-            <div className="max-w-2xl mx-auto space-y-4 mb-12 text-gray-600 font-bold">
-               <p className="text-xl">Every jumper needs a valid waiver on file before participating.</p>
-               <p className="text-sm text-gray-400 uppercase tracking-widest leading-relaxed font-black">Adults 18+ must sign for themselves. Minors under 18 must be signed by a parent or legal guardian.</p>
+      <section className="max-w-7xl mx-auto px-6 pb-40">
+         <div className="bg-[#020617] border border-slate-800 rounded-[5rem] p-16 md:p-32 text-center relative overflow-hidden shadow-2xl">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,112,243,0.1),transparent)]"></div>
+            <h2 className="text-4xl md:text-9xl font-black italic font-headings uppercase tracking-tighter mb-12 text-white relative z-10 leading-none">Waiver Required</h2>
+            <div className="max-w-3xl mx-auto space-y-8 mb-20 relative z-10 text-slate-300 font-bold">
+               <p className="text-3xl italic tracking-tight text-white/90">Safety is our top priority.</p>
+               <p className="text-sm text-slate-500 uppercase tracking-[0.4em] leading-loose font-black italic">Every jumper needs a valid waiver on file before participating. <br/> Adults 18+ must sign for themselves. <br/> Minors under 18 must be signed by a parent or legal guardian.</p>
             </div>
-            <a href={`${SITE_BASE}/waiver`} className="relative z-10 inline-block bg-accent hover:bg-orange-600 text-white font-black uppercase py-5 px-16 rounded-2xl text-xl transition-all shadow-2xl shadow-accent/30 italic">
-               Complete Waiver
+            <a href={`${SITE_BASE}/waiver`} className="relative z-10 inline-block bg-orange-500 hover:bg-orange-600 text-white font-black uppercase py-7 px-20 rounded-[3rem] text-2xl transition-all shadow-2xl shadow-orange-500/30 hover:scale-105 active:scale-95 italic tracking-tight">
+               Sign Your Waiver
             </a>
          </div>
       </section>
 
       {/* 10. FINAL CTA SECTION */}
-      <section className="py-32 px-6 text-center bg-gray-900 relative overflow-hidden">
-         <div className="absolute inset-0 bg-primary/10"></div>
+      <section className="py-48 px-6 text-center bg-primary relative overflow-hidden">
+         <div className="absolute inset-0 bg-black/10"></div>
          <div className="relative z-10">
-            <h2 className="text-5xl md:text-8xl font-black italic font-headings uppercase tracking-tighter mb-12 text-white">{t.readyToJump}</h2>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-               <a href={`${SITE_BASE}/book`} className="bg-primary text-white hover:bg-blue-600 font-black uppercase py-6 px-16 rounded-[2rem] text-xl transition-all shadow-2xl italic">
+            <h2 className="text-7xl md:text-[12rem] font-black italic font-headings uppercase tracking-tighter mb-20 text-white drop-shadow-xl leading-none">Ready to Jump?</h2>
+            <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
+               <a href={`${SITE_BASE}/book`} className="w-full sm:w-auto bg-slate-950 text-white hover:bg-black font-black uppercase py-8 px-24 rounded-[3rem] text-3xl transition-all shadow-2xl shadow-black/40 italic tracking-tight hover:scale-105">
                   Book Now
                </a>
-               <a href={`${SITE_BASE}/waiver`} className="bg-white text-gray-900 hover:bg-gray-100 font-black uppercase py-6 px-16 rounded-[2rem] text-xl transition-all shadow-2xl italic">
+               <a href={`${SITE_BASE}/waiver`} className="w-full sm:w-auto bg-white text-primary hover:bg-slate-50 font-black uppercase py-8 px-24 rounded-[3rem] text-3xl transition-all shadow-2xl italic tracking-tight hover:scale-105">
                   Sign Waiver
                </a>
             </div>
@@ -320,46 +350,46 @@ export default function LandingPage() {
       </section>
 
       {/* 11. FOOTER (Branded) */}
-      <footer className="bg-black pt-32 pb-12 px-6 border-t border-white/5">
+      <footer className="bg-white dark:bg-slate-950 pt-32 pb-12 px-6 border-t border-slate-200 dark:border-slate-900">
          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 mb-24">
             <div>
-               <h3 className="text-2xl font-black italic font-headings text-secondary uppercase tracking-tighter mb-8">
-                 SOAR <span className="text-primary">'N</span> BOUNCE
+               <h3 className="text-2xl font-black italic font-headings text-primary uppercase tracking-tighter mb-8">
+                 SOAR <span className="text-orange-500">'N</span> BOUNCE
                </h3>
-               <p className="text-gray-500 font-bold leading-relaxed max-w-xs">The ultimate indoor trampoline experience in Grandville, Michigan.</p>
+               <p className="text-slate-500 font-bold leading-relaxed max-w-xs text-sm">The ultimate indoor trampoline experience in Grandville, Michigan.</p>
             </div>
             <div>
-               <h4 className="font-black uppercase tracking-widest text-xs text-primary mb-8">{t.footerLinks}</h4>
-               <ul className="space-y-4 font-bold text-gray-400">
-                  <li><a href={`${SITE_BASE}/book`} className="hover:text-white transition-colors">Book Jump</a></li>
-                  <li><a href={`${SITE_BASE}/waiver`} className="hover:text-white transition-colors">Waiver</a></li>
-                  <li><a href={`${SITE_BASE}/book`} className="hover:text-white transition-colors">Parties</a></li>
-                  <li><a href="#attractions" className="hover:text-white transition-colors">Attractions</a></li>
+               <h4 className="font-black uppercase tracking-widest text-[10px] text-slate-400 mb-8 tracking-[0.3em]">Links</h4>
+               <ul className="space-y-4 font-bold text-slate-600 dark:text-slate-400 text-sm">
+                  <li><a href={`${SITE_BASE}/book`} className="hover:text-primary transition-colors">Book Jump</a></li>
+                  <li><a href={`${SITE_BASE}/waiver`} className="hover:text-primary transition-colors">Waiver</a></li>
+                  <li><a href={`${SITE_BASE}/book`} className="hover:text-primary transition-colors">Parties</a></li>
+                  <li><a href="#attractions" className="hover:text-primary transition-colors">Attractions</a></li>
                </ul>
             </div>
             <div>
-               <h4 className="font-black uppercase tracking-widest text-xs text-secondary mb-8">Hours</h4>
-               <ul className="space-y-2 text-sm font-bold text-gray-500">
-                  <li className="flex justify-between"><span>Mon - Thu:</span> <span className="text-white">10AM - 9PM</span></li>
-                  <li className="flex justify-between"><span>Fri - Sat:</span> <span class="text-white">10AM - 10PM</span></li>
-                  <li className="flex justify-between"><span>Sunday:</span> <span class="text-white">10AM - 9PM</span></li>
+               <h4 className="font-black uppercase tracking-widest text-[10px] text-slate-400 mb-8 tracking-[0.3em]">Hours</h4>
+               <ul className="space-y-2 text-sm font-bold text-slate-500">
+                  <li className="flex justify-between"><span>Mon - Thu:</span> <span className="text-slate-900 dark:text-slate-200">10AM - 9PM</span></li>
+                  <li className="flex justify-between"><span>Fri - Sat:</span> <span className="text-slate-900 dark:text-slate-200 uppercase tracking-tighter">10AM - 10PM</span></li>
+                  <li className="flex justify-between"><span>Sunday:</span> <span className="text-slate-900 dark:text-slate-200">10AM - 9PM</span></li>
                </ul>
             </div>
             <div>
-               <h4 className="font-black uppercase tracking-widest text-xs text-accent mb-8">{t.footerContact}</h4>
-               <div className="space-y-4 text-sm font-bold text-gray-500">
+               <h4 className="font-black uppercase tracking-widest text-[10px] text-slate-400 mb-8 tracking-[0.3em]">Contact</h4>
+               <div className="space-y-4 text-sm font-bold text-slate-500">
                   <p>3668 Rivertown Pkwy SW<br/>Grandville MI 49418</p>
-                  <p className="text-white">616-215-0999</p>
-                  <p className="text-primary">InfoGV@soarnbounce.com</p>
+                  <p className="text-slate-900 dark:text-slate-200 font-black">616-215-0999</p>
+                  <p className="text-primary underline">InfoGV@soarnbounce.com</p>
                </div>
             </div>
          </div>
-         <div className="max-w-7xl mx-auto pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-black uppercase tracking-[0.3em] text-gray-600">
+         <div className="max-w-7xl mx-auto pt-12 border-t border-slate-100 dark:border-slate-900 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">
             <p>&copy; 2026 SOAR N BOUNCE. ALL RIGHTS RESERVED.</p>
             <div className="flex gap-8">
-               <a href="#" className="hover:text-white">Privacy</a>
-               <a href="#" className="hover:text-white">Terms</a>
-               <a href="#" className="hover:text-white">Accessibility</a>
+               <a href="#" className="hover:text-primary transition-colors">Privacy</a>
+               <a href="#" className="hover:text-primary transition-colors">Terms</a>
+               <a href="#" className="hover:text-primary transition-colors">Accessibility</a>
             </div>
          </div>
       </footer>

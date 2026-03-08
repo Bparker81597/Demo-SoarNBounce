@@ -93,21 +93,21 @@ export default function WaiverSystem() {
   };
 
   return (
-    <div className="min-h-screen text-gray-900 bg-transparent font-sans pb-20">
+    <div className="min-h-screen text-slate-900 dark:text-slate-100 bg-transparent font-sans pb-20 transition-colors duration-500">
       
       {/* 1. HERO SECTION */}
-      <section className="pt-16 pb-12 px-6 text-center relative">
-        <div className="flex justify-center mb-8">
-          <div className="bg-white p-1 rounded-2xl border border-gray-200 flex shadow-xl">
+      <section className="pt-24 pb-16 px-6 text-center relative">
+        <div className="flex justify-center mb-10">
+          <div className="bg-white dark:bg-slate-900 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-800 flex shadow-2xl">
             <button 
               onClick={() => setLang('en')}
-              className={`px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${lang === 'en' ? 'bg-primary text-white shadow-lg italic' : 'text-gray-400 hover:text-gray-900'}`}
+              className={`px-8 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${lang === 'en' ? 'bg-primary text-white shadow-lg italic' : 'text-slate-400 hover:text-slate-900 dark:hover:text-white'}`}
             >
               English
             </button>
             <button 
               onClick={() => setLang('es')}
-              className={`px-6 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${lang === 'es' ? 'bg-primary text-white shadow-lg italic' : 'text-gray-400 hover:text-gray-900'}`}
+              className={`px-8 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${lang === 'es' ? 'bg-primary text-white shadow-lg italic' : 'text-slate-400 hover:text-slate-900 dark:hover:text-white'}`}
             >
               Español
             </button>
@@ -117,168 +117,169 @@ export default function WaiverSystem() {
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-5xl md:text-7xl font-black italic font-headings uppercase tracking-tighter mb-4 text-gray-900"
+          className="text-6xl md:text-8xl font-black italic font-headings uppercase tracking-tighter mb-6 text-slate-900 dark:text-white leading-none"
         >
           {t.title}
         </motion.h1>
-        <p className="text-xl text-gray-500 max-w-2xl mx-auto mb-8 font-bold">
+        <p className="text-xl md:text-2xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto mb-12 font-bold italic tracking-tight">
           {t.subtitle}
         </p>
 
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          <span className="bg-white text-primary border border-gray-100 shadow-md px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest flex items-center">
-            <span className="mr-2">🛡️</span> {t.secureWaiver}
+        <div className="flex flex-wrap justify-center gap-6 mb-16">
+          <span className="bg-white dark:bg-slate-900 text-primary border border-slate-100 dark:border-slate-800 shadow-xl px-6 py-3 rounded-2xl text-xs font-black uppercase tracking-widest flex items-center italic">
+            <span className="mr-3 text-xl">🛡️</span> {t.secureWaiver}
           </span>
-          <span className="bg-white text-secondary-dark border border-gray-100 shadow-md px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest flex items-center">
-            <span className="mr-2">🚀</span> {t.readyToJump}
+          <span className="bg-white dark:bg-slate-900 text-secondary border border-slate-100 dark:border-slate-800 shadow-xl px-6 py-3 rounded-2xl text-xs font-black uppercase tracking-widest flex items-center italic">
+            <span className="mr-3 text-xl">🚀</span> {t.readyToJump}
           </span>
-          <span className="bg-white text-accent border border-gray-100 shadow-md px-4 py-2 rounded-full text-xs font-black uppercase tracking-widest flex items-center">
-            <span className="mr-2">👨‍👩‍👧‍👦</span> {t.familyFriendly}
+          <span className="bg-white dark:bg-slate-900 text-orange-500 dark:text-orange-400 border border-slate-100 dark:border-slate-800 shadow-xl px-6 py-3 rounded-2xl text-xs font-black uppercase tracking-widest flex items-center italic">
+            <span className="mr-3 text-xl">👨‍👩‍👧‍👦</span> {t.familyFriendly}
           </span>
         </div>
 
-        <div className="text-primary font-black uppercase tracking-[0.3em] text-sm italic">
+        <div className="text-primary dark:text-primary font-black uppercase tracking-[0.4em] text-sm italic">
            📍 {t.location}
         </div>
       </section>
 
-      <div className="max-w-4xl mx-auto px-6 space-y-12">
+      <div className="max-w-4xl mx-auto px-6 space-y-16">
         
         {/* 2. WAIVER TYPE SELECTION */}
-        <section className="bg-white border border-gray-100 rounded-[3rem] p-8 md:p-12 shadow-xl">
-          <h2 className="text-2xl font-black mb-8 text-primary flex items-center italic uppercase tracking-tight">
-             <span className="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center text-sm not-italic mr-4">1</span>
+        <section className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[4rem] p-10 md:p-16 shadow-2xl relative overflow-hidden">
+          <h2 className="text-3xl font-black mb-12 text-slate-900 dark:text-white flex items-center italic uppercase tracking-tight">
+             <span className="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center text-sm not-italic mr-5 shadow-lg shadow-primary/20">1</span>
              {t.selectType}
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <button 
               onClick={() => setWaiverType('family')}
-              className={`text-left p-8 rounded-[2rem] border-2 transition-all relative group ${waiverType === 'family' ? 'border-primary bg-primary/5 shadow-inner' : 'border-gray-50 bg-gray-50 hover:border-gray-200 hover:bg-white hover:shadow-lg'}`}
+              className={`text-left p-10 rounded-[3rem] border-2 transition-all relative group ${waiverType === 'family' ? 'border-primary bg-primary/5 dark:bg-primary/10 shadow-inner' : 'border-slate-50 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 hover:border-slate-200 dark:hover:border-slate-700 hover:bg-white dark:hover:bg-slate-900 hover:shadow-2xl'}`}
             >
-               <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">👨‍👩‍👧‍👦</div>
-               <h3 className="text-xl font-black mb-2 uppercase tracking-tight">{t.meAndKids}</h3>
-               <p className="text-sm text-gray-500 leading-relaxed font-bold">{t.meAndKidsDesc}</p>
-               {waiverType === 'family' && <span className="absolute top-6 right-6 text-primary font-black">✔</span>}
+               <div className="text-5xl mb-6 group-hover:scale-110 transition-transform">👨‍👩‍👧‍👦</div>
+               <h3 className="text-2xl font-black mb-3 uppercase tracking-tight text-slate-900 dark:text-white italic">{t.meAndKids}</h3>
+               <p className="text-slate-500 dark:text-slate-400 font-bold leading-relaxed">{t.meAndKidsDesc}</p>
+               {waiverType === 'family' && <span className="absolute top-8 right-8 text-primary text-2xl font-black">✔</span>}
             </button>
             <button 
               onClick={() => setWaiverType('single')}
-              className={`text-left p-8 rounded-[2rem] border-2 transition-all relative group ${waiverType === 'single' ? 'border-primary bg-primary/5 shadow-inner' : 'border-gray-50 bg-gray-50 hover:border-gray-200 hover:bg-white hover:shadow-lg'}`}
+              className={`text-left p-10 rounded-[3rem] border-2 transition-all relative group ${waiverType === 'single' ? 'border-primary bg-primary/5 dark:bg-primary/10 shadow-inner' : 'border-slate-50 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 hover:border-slate-200 dark:hover:border-slate-700 hover:bg-white dark:hover:bg-slate-900 hover:shadow-2xl'}`}
             >
-               <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">👤</div>
-               <h3 className="text-xl font-black mb-2 uppercase tracking-tight">{t.justMe}</h3>
-               <p className="text-sm text-gray-500 leading-relaxed font-bold">{t.justMeDesc}</p>
-               {waiverType === 'single' && <span className="absolute top-6 right-6 text-primary font-black">✔</span>}
+               <div className="text-5xl mb-6 group-hover:scale-110 transition-transform">👤</div>
+               <h3 className="text-2xl font-black mb-3 uppercase tracking-tight text-slate-900 dark:text-white italic">{t.justMe}</h3>
+               <p className="text-slate-500 dark:text-slate-400 font-bold leading-relaxed">{t.justMeDesc}</p>
+               {waiverType === 'single' && <span className="absolute top-8 right-8 text-primary text-2xl font-black">✔</span>}
             </button>
           </div>
         </section>
 
         {/* 3. EMAIL INPUT */}
-        <section className="bg-white border border-gray-100 rounded-[3rem] p-8 md:p-12 shadow-xl">
-           <h2 className="text-2xl font-black mb-8 text-accent flex items-center italic uppercase tracking-tight">
-             <span className="bg-accent text-white w-8 h-8 rounded-full flex items-center justify-center text-sm not-italic mr-4 font-black">2</span>
+        <section className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-[4rem] p-10 md:p-16 shadow-2xl">
+           <h2 className="text-3xl font-black mb-12 text-slate-900 dark:text-white flex items-center italic uppercase tracking-tight">
+             <span className="bg-orange-500 text-white w-10 h-10 rounded-full flex items-center justify-center text-sm not-italic mr-5 font-black shadow-lg shadow-orange-500/20">2</span>
              {t.enterEmail}
           </h2>
-          <div className="max-w-md">
+          <div className="max-w-xl">
             <input 
               type="email" 
               placeholder={t.emailPlaceholder}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-6 py-4 text-gray-900 outline-none focus:border-primary focus:bg-white transition-all text-lg mb-4 shadow-sm"
+              className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-3xl px-8 py-6 text-slate-900 dark:text-white outline-none focus:border-primary focus:bg-white dark:focus:bg-slate-900 transition-all text-xl mb-6 shadow-sm font-bold placeholder:text-slate-300 dark:placeholder:text-slate-700"
             />
-            <p className="text-sm text-gray-400 italic font-bold">
+            <p className="text-slate-400 dark:text-slate-500 italic font-bold text-lg leading-relaxed">
               {t.emailHelp}
             </p>
           </div>
         </section>
 
         {/* 4. ACTION BUTTONS */}
-        <section className="flex flex-col sm:flex-row gap-6">
+        <section className="flex flex-col sm:flex-row gap-8">
            <button 
              onClick={handleOpenWaiver}
-             className="flex-1 bg-primary hover:bg-blue-600 text-white font-black uppercase py-6 rounded-[2rem] text-xl transition-all shadow-2xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] italic"
+             className="flex-1 bg-primary hover:bg-blue-600 text-white font-black uppercase py-8 rounded-[2.5rem] text-2xl transition-all shadow-2xl shadow-primary/30 hover:scale-105 active:scale-95 italic tracking-tight"
            >
              {t.openWaiver} &rarr;
            </button>
            <button 
              onClick={handleOpenWaiver}
-             className="flex-1 bg-white border-2 border-gray-200 hover:border-primary text-gray-900 font-black uppercase py-6 rounded-[2rem] text-xl transition-all hover:bg-gray-50 italic"
+             className="flex-1 bg-white dark:bg-slate-900 border-4 border-slate-100 dark:border-slate-800 hover:border-primary dark:hover:border-primary text-slate-900 dark:text-white font-black uppercase py-8 rounded-[2.5rem] text-2xl transition-all hover:shadow-2xl italic tracking-tight"
            >
              {t.startNew}
            </button>
         </section>
 
         {/* 5. HOW IT WORKS */}
-        <section className="py-12">
-           <h2 className="text-3xl font-black italic uppercase tracking-tighter text-center mb-12 text-gray-900">{t.howItWorks}</h2>
-           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <section className="py-20">
+           <h2 className="text-4xl font-black italic uppercase tracking-tighter text-center mb-16 text-slate-900 dark:text-white leading-none">{t.howItWorks}</h2>
+           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {[t.step1, t.step2, t.step3, t.step4].map((step, i) => (
-                <div key={i} className="bg-white p-6 rounded-3xl border border-gray-100 text-center relative overflow-hidden group shadow-lg hover:shadow-xl transition-all">
-                   <div className="text-6xl font-black absolute -top-4 -right-2 opacity-5 text-primary group-hover:opacity-10 transition-opacity italic">{i + 1}</div>
-                   <div className="bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-4 font-black italic shadow-md">{i + 1}</div>
-                   <p className="font-black text-sm text-gray-700 leading-snug uppercase tracking-tight">{step}</p>
+                <div key={i} className="bg-white dark:bg-slate-900 p-8 rounded-[3rem] border border-slate-100 dark:border-slate-800 text-center relative overflow-hidden group shadow-xl hover:shadow-2xl transition-all">
+                   <div className="text-7xl font-black absolute -top-6 -right-4 opacity-[0.03] dark:opacity-[0.05] text-primary group-hover:opacity-10 transition-opacity italic">{i + 1}</div>
+                   <div className="bg-primary text-white w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-6 font-black italic shadow-xl shadow-primary/20 rotate-3 group-hover:rotate-0 transition-transform">{i + 1}</div>
+                   <p className="font-black text-slate-700 dark:text-slate-300 leading-snug uppercase tracking-tight text-sm italic">{step}</p>
                 </div>
               ))}
            </div>
         </section>
 
         {/* 6. BEFORE YOU JUMP RULES */}
-        <section className="bg-gray-900 border border-gray-800 rounded-[3rem] p-8 md:p-12 shadow-2xl">
-           <h2 className="text-3xl font-black italic uppercase tracking-tighter text-accent mb-12 flex items-center">
-             <span className="mr-4">⚠️</span> {t.rulesTitle}
+        <section className="bg-slate-900 dark:bg-slate-950 border border-slate-800 rounded-[4rem] p-12 md:p-20 shadow-2xl relative overflow-hidden">
+           <div className="absolute top-0 right-0 w-64 h-64 bg-orange-500/5 rounded-full blur-[100px]"></div>
+           <h2 className="text-4xl md:text-6xl font-black italic font-headings uppercase tracking-tighter text-orange-500 mb-16 flex items-center leading-none">
+             <span className="mr-6 text-5xl">⚠️</span> {t.rulesTitle}
            </h2>
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 gap-x-16 relative z-10">
               {[t.rule1, t.rule2, t.rule3, t.rule4, t.rule5, t.rule6].map((rule, i) => (
-                <div key={i} className="flex items-start space-x-4">
-                   <span className="text-accent text-xl mt-1">✔</span>
-                   <p className="font-bold text-gray-300">{rule}</p>
+                <div key={i} className="flex items-start space-x-5 group">
+                   <span className="text-orange-500 font-black text-2xl mt-0.5 group-hover:scale-125 transition-transform italic">✔</span>
+                   <p className="font-bold text-white/90 text-lg leading-tight tracking-tight italic uppercase">{rule}</p>
                 </div>
               ))}
            </div>
         </section>
 
         {/* 7 & 8. HOURS & CONTACT */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-gray-900">
-           <div className="bg-white p-10 rounded-[3rem] border border-gray-100 shadow-xl">
-              <h3 className="text-2xl font-black italic uppercase text-primary mb-8 underline decoration-primary/20 underline-offset-8">Grandville Hours</h3>
-              <ul className="space-y-4 font-bold">
-                 <li className="flex justify-between">
-                    <span className="text-gray-400 uppercase text-xs tracking-widest">{t.monThu}</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-slate-900 dark:text-slate-100">
+           <div className="bg-white dark:bg-slate-900 p-12 rounded-[4rem] border border-slate-200 dark:border-slate-800 shadow-2xl">
+              <h3 className="text-3xl font-black italic uppercase text-primary mb-10 underline decoration-orange-500/30 underline-offset-8">Grandville Hours</h3>
+              <ul className="space-y-6 font-black text-xl italic tracking-tighter">
+                 <li className="flex justify-between border-b border-slate-100 dark:border-slate-800 pb-4">
+                    <span className="text-slate-400 uppercase text-[10px] tracking-[0.3em] font-black italic">{t.monThu}</span>
                     <span>10 AM – 9 PM</span>
                  </li>
-                 <li className="flex justify-between text-primary italic">
-                    <span className="uppercase text-xs tracking-widest">{t.friSat}</span>
+                 <li className="flex justify-between text-primary italic border-b border-slate-100 dark:border-slate-800 pb-4">
+                    <span className="uppercase text-[10px] tracking-[0.3em] font-black italic">{t.friSat}</span>
                     <span>10 AM – 10 PM</span>
                  </li>
-                 <li className="flex justify-between">
-                    <span className="text-gray-400 uppercase text-xs tracking-widest">{t.sun}</span>
+                 <li className="flex justify-between pb-2">
+                    <span className="text-slate-400 uppercase text-[10px] tracking-[0.3em] font-black italic">{t.sun}</span>
                     <span>10 AM – 9 PM</span>
                  </li>
               </ul>
-              <p className="text-[10px] text-gray-400 mt-6 uppercase font-black tracking-widest">{t.hoursNotice}</p>
+              <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-10 uppercase font-black tracking-[0.2em] italic text-center">{t.hoursNotice}</p>
            </div>
 
-           <div className="bg-white p-10 rounded-[3rem] border border-gray-100 shadow-xl">
-              <h3 className="text-2xl font-black italic uppercase text-accent mb-8 underline decoration-accent/20 underline-offset-8">Contact Info</h3>
-              <div className="space-y-6 font-bold text-gray-700">
-                 <div className="flex items-start space-x-4">
-                    <span className="text-xl">📍</span>
-                    <p>3668 Rivertown Pkwy SW<br/>Grandville MI 49418</p>
+           <div className="bg-white dark:bg-slate-900 p-12 rounded-[4rem] border border-slate-200 dark:border-slate-800 shadow-2xl">
+              <h3 className="text-3xl font-black italic uppercase text-orange-500 mb-10 underline decoration-primary/30 underline-offset-8">Contact Info</h3>
+              <div className="space-y-10 font-bold text-slate-700 dark:text-slate-300">
+                 <div className="flex items-start space-x-6">
+                    <span className="text-3xl bg-slate-50 dark:bg-slate-950 p-3 rounded-2xl border border-slate-100 dark:border-slate-800">📍</span>
+                    <p className="text-xl font-black tracking-tight leading-snug italic uppercase">3668 Rivertown Pkwy SW<br/>Grandville MI 49418</p>
                  </div>
-                 <div className="flex items-start space-x-4">
-                    <span className="text-xl text-primary">📞</span>
-                    <p>616-215-0999<br/>616-215-0998</p>
+                 <div className="flex items-start space-x-6">
+                    <span className="text-3xl bg-slate-50 dark:bg-slate-950 p-3 rounded-2xl border border-slate-100 dark:border-slate-800">📞</span>
+                    <p className="text-xl font-black text-slate-900 dark:text-white tabular-nums tracking-tighter italic">616-215-0999<br/>616-215-0998</p>
                  </div>
-                 <div className="flex items-start space-x-4">
-                    <span className="text-xl text-accent">✉️</span>
-                    <p className="text-primary underline">InfoGV@soarnbounce.com</p>
+                 <div className="flex items-start space-x-6">
+                    <span className="text-3xl bg-slate-50 dark:bg-slate-950 p-3 rounded-2xl border border-slate-100 dark:border-slate-800">✉️</span>
+                    <p className="text-primary underline font-black italic text-lg tracking-tight">InfoGV@soarnbounce.com</p>
                  </div>
               </div>
            </div>
         </div>
 
         {/* 9. DISCLAIMER */}
-        <p className="text-center text-xs text-gray-400 max-w-2xl mx-auto px-6 italic font-medium">
+        <p className="text-center text-xs text-slate-400 dark:text-slate-600 max-w-3xl mx-auto px-10 italic font-bold leading-relaxed pt-10">
           {t.disclaimer}
         </p>
 
