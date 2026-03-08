@@ -22,11 +22,11 @@ const { title } = Astro.props;
         --color-primary: #0070f3;
         --color-secondary: #39ff14;
         --color-accent: #ff6700;
-        --color-dark: #0a0a0a;
+        --color-dark: #1a1a1a;
       }
       body {
-        background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
-        color: white;
+        background: #f8f9fa;
+        color: #1a1a1a;
         margin: 0;
         min-height: 100vh;
       }
@@ -35,44 +35,44 @@ const { title } = Astro.props;
       }
     </style>
   </head>
-  <body class="font-sans antialiased">
+  <body class="font-sans antialiased text-gray-900">
     <!-- Desktop Navigation -->
-    <header class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/10 hidden md:block">
+    <header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 hidden md:block">
       <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <a href="/Demo-SoarNBounce/" class="text-2xl font-headings font-bold italic text-secondary tracking-tighter">
-          SOAR <span class="text-primary">'N</span> BOUNCE
+        <a href="/Demo-SoarNBounce/" class="text-2xl font-headings font-bold italic text-primary tracking-tighter">
+          SOAR <span class="text-accent">'N</span> BOUNCE
         </a>
         
-        <div class="hidden md:flex items-center space-x-8">
-          <a href="/Demo-SoarNBounce/" class="hover:text-primary transition-colors font-semibold">Home</a>
-          <a href="/Demo-SoarNBounce/about" class="hover:text-primary transition-colors font-semibold">About</a>
-          <a href="/Demo-SoarNBounce/attractions" class="hover:text-primary transition-colors font-semibold">Attractions</a>
-          <a href="/Demo-SoarNBounce/parties" class="hover:text-primary transition-colors font-semibold">Parties</a>
-          <a href="/Demo-SoarNBounce/events" class="hover:text-primary transition-colors font-semibold">Events</a>
-          <a href="/Demo-SoarNBounce/pricing" class="hover:text-primary transition-colors font-semibold">Pricing</a>
-          <a href="/Demo-SoarNBounce/waiver" class="hover:text-primary transition-colors font-semibold">Waiver</a>
+        <div class="hidden md:flex items-center space-x-8 text-gray-700">
+          <a href="/Demo-SoarNBounce/" class="hover:text-primary transition-colors font-bold">Home</a>
+          <a href="/Demo-SoarNBounce/about" class="hover:text-primary transition-colors font-bold">About</a>
+          <a href="/Demo-SoarNBounce/attractions" class="hover:text-primary transition-colors font-bold">Attractions</a>
+          <a href="/Demo-SoarNBounce/parties" class="hover:text-primary transition-colors font-bold">Parties</a>
+          <a href="/Demo-SoarNBounce/events" class="hover:text-primary transition-colors font-bold">Events</a>
+          <a href="/Demo-SoarNBounce/pricing" class="hover:text-primary transition-colors font-bold">Pricing</a>
+          <a href="/Demo-SoarNBounce/waiver" class="hover:text-primary transition-colors font-bold">Waiver</a>
         </div>
 
         <div class="flex items-center space-x-4">
-          <a href="/Demo-SoarNBounce/book" class="bg-primary hover:bg-blue-600 text-white px-6 py-2 rounded-full font-bold transition-all shadow-lg shadow-primary/20">
+          <a href="/Demo-SoarNBounce/book" class="bg-primary hover:bg-blue-600 text-white px-6 py-2 rounded-full font-bold transition-all shadow-lg shadow-primary/20 italic">
             Book Now
           </a>
         </div>
       </nav>
     </header>
 
-    <!-- Sticky CTAs for Desktop/Mobile (Sidebar style or bottom float) -->
+    <!-- Sticky CTAs for Desktop/Mobile -->
     <div class="fixed right-6 bottom-24 z-40 flex flex-col space-y-3 hidden md:flex">
-      <a href="/Demo-SoarNBounce/book" class="bg-primary hover:scale-105 transition-transform p-4 rounded-full shadow-2xl group relative">
-         <span class="absolute right-full mr-4 bg-black/80 px-3 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Book Jump Time</span>
+      <a href="/Demo-SoarNBounce/book" class="bg-primary hover:scale-105 transition-transform p-4 rounded-full shadow-2xl group relative text-white">
+         <span class="absolute right-full mr-4 bg-white px-3 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap text-gray-900 border border-gray-200 shadow-sm font-bold">Book Jump Time</span>
          🚀
       </a>
-      <a href="/Demo-SoarNBounce/parties" class="bg-accent hover:scale-105 transition-transform p-4 rounded-full shadow-2xl group relative">
-         <span class="absolute right-full mr-4 bg-black/80 px-3 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">Book Party</span>
+      <a href="/Demo-SoarNBounce/parties" class="bg-accent hover:scale-105 transition-transform p-4 rounded-full shadow-2xl group relative text-white">
+         <span class="absolute right-full mr-4 bg-white px-3 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap text-gray-900 border border-gray-200 shadow-sm font-bold">Book Party</span>
          🎂
       </a>
-      <a href="/Demo-SoarNBounce/waiver" class="bg-secondary hover:scale-105 transition-transform p-4 rounded-full shadow-2xl group relative text-black">
-         <span class="absolute right-full mr-4 bg-black/80 px-3 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity text-white whitespace-nowrap">Sign Waiver</span>
+      <a href="/Demo-SoarNBounce/waiver" class="bg-secondary hover:scale-105 transition-transform p-4 rounded-full shadow-2xl group relative text-gray-900">
+         <span class="absolute right-full mr-4 bg-white px-3 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap text-gray-900 border border-gray-200 shadow-sm font-bold">Sign Waiver</span>
          ✍️
       </a>
     </div>
@@ -82,60 +82,61 @@ const { title } = Astro.props;
     </main>
 
     <!-- Mobile Navigation -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-black/90 backdrop-blur-lg border-t border-white/10 md:hidden z-50 flex justify-around items-center py-4 px-2">
+    <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 md:hidden z-50 flex justify-around items-center py-4 px-2 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
       <a href="/Demo-SoarNBounce/" class="flex flex-col items-center space-y-1">
         <span class="text-xl">🏠</span>
-        <span class="text-[10px] uppercase font-bold text-gray-400">Home</span>
+        <span class="text-[10px] uppercase font-bold text-gray-500">Home</span>
       </a>
       <a href="/Demo-SoarNBounce/book" class="flex flex-col items-center space-y-1">
-        <span class="text-xl text-primary">🎟️</span>
+        <span class="text-xl">🎟️</span>
         <span class="text-[10px] uppercase font-bold text-primary">Book</span>
       </a>
       <a href="/Demo-SoarNBounce/parties" class="flex flex-col items-center space-y-1">
-        <span class="text-xl text-accent">🎉</span>
+        <span class="text-xl">🎉</span>
         <span class="text-[10px] uppercase font-bold text-accent">Parties</span>
       </a>
       <a href="/Demo-SoarNBounce/pricing" class="flex flex-col items-center space-y-1">
         <span class="text-xl">⏰</span>
-        <span class="text-[10px] uppercase font-bold text-gray-400">Hours</span>
+        <span class="text-[10px] uppercase font-bold text-gray-500">Hours</span>
       </a>
-      <a href="/Demo-SoarNBounce/waiver" class="flex flex-col items-center space-y-1 text-secondary">
+      <a href="/Demo-SoarNBounce/waiver" class="flex flex-col items-center space-y-1">
         <span class="text-xl">🖊️</span>
-        <span class="text-[10px] uppercase font-bold">Waiver</span>
+        <span class="text-[10px] uppercase font-bold text-gray-500">Waiver</span>
       </a>
     </nav>
 
-    <footer class="bg-black/50 py-16 px-6 mt-12 border-t border-white/5">
+    <footer class="bg-white py-16 px-6 mt-12 border-t border-gray-200">
       <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
         <div>
-           <h3 class="text-2xl font-headings font-bold text-white mb-6 italic">SOAR <span class="text-primary">'N</span> BOUNCE</h3>
-           <p class="text-gray-400 max-w-sm">The ultimate trampoline park for high-energy fun and unforgettable birthday celebrations in Grandville, MI.</p>
+           <h3 class="text-2xl font-headings font-bold text-primary mb-6 italic tracking-tighter">SOAR <span class="text-accent">'N</span> BOUNCE</h3>
+           <p class="text-gray-500 max-w-sm font-medium">The ultimate trampoline park for high-energy fun and unforgettable birthday celebrations in Grandville, MI.</p>
         </div>
         <div>
-           <h4 class="font-bold text-lg mb-6 text-primary uppercase tracking-wider">Hours</h4>
-           <ul class="space-y-3 text-gray-400">
-             <li class="flex justify-between"><span>Mon - Thu:</span> <span class="text-white">10AM - 8PM</span></li>
-             <li class="flex justify-between font-bold text-secondary"><span>Fri - Sat:</span> <span class="text-white">10AM - 10PM</span></li>
-             <li class="flex justify-between"><span>Sun:</span> <span class="text-white">11AM - 7PM</span></li>
+           <h4 class="font-black text-xs mb-6 text-gray-400 uppercase tracking-[0.2em]">Hours</h4>
+           <ul class="space-y-3 text-gray-600 font-bold">
+             <li class="flex justify-between"><span>Mon - Thu:</span> <span>10AM - 8PM</span></li>
+             <li class="flex justify-between text-primary italic"><span>Fri - Sat:</span> <span>10AM - 10PM</span></li>
+             <li class="flex justify-between"><span>Sun:</span> <span>11AM - 7PM</span></li>
            </ul>
         </div>
         <div>
-           <h4 class="font-bold text-lg mb-6 text-primary uppercase tracking-wider">Location</h4>
-           <p class="text-gray-400 leading-relaxed mb-4">
+           <h4 class="font-black text-xs mb-6 text-gray-400 uppercase tracking-[0.2em]">Location</h4>
+           <p class="text-gray-600 font-bold leading-relaxed mb-4">
              123 Jump Street<br/>
              Grandville, MI 49418
            </p>
-           <a href="https://maps.google.com" target="_blank" class="text-secondary hover:underline font-bold">Get Directions &rarr;</a>
+           <a href="https://maps.google.com" target="_blank" class="text-primary hover:underline font-black italic uppercase text-sm tracking-widest">Get Directions &rarr;</a>
         </div>
       </div>
-      <div class="max-w-7xl mx-auto pt-12 mt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+      <div class="max-w-7xl mx-auto pt-12 mt-12 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center text-[10px] font-black uppercase tracking-widest text-gray-400">
          <p>&copy; 2026 Soar N Bounce. All rights reserved.</p>
          <div class="flex space-x-6 mt-4 md:mt-0">
-           <a href="#" class="hover:text-white transition-colors">Facebook</a>
-           <a href="#" class="hover:text-white transition-colors">Instagram</a>
-           <a href="#" class="hover:text-white transition-colors">TikTok</a>
+           <a href="#" class="hover:text-primary transition-colors">Facebook</a>
+           <a href="#" class="hover:text-primary transition-colors">Instagram</a>
+           <a href="#" class="hover:text-primary transition-colors">TikTok</a>
          </div>
       </div>
     </footer>
+
   </body>
 </html>
