@@ -117,7 +117,6 @@ export default function BookingSystem() {
   const [time, setTime] = useState<string>('');
   const [jumpers, setJumpers] = useState<number>(1);
   const [needsSocks, setNeedsSocks] = useState<boolean>(true);
-  const [sockPairs, setSockPairs] = useState<number>(1);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -190,13 +189,13 @@ export default function BookingSystem() {
       }
     }
 
-    const socksTotal = needsSocks ? (sockPairs * PRICING_CONFIG.socks) : 0;
+    const socksTotal = needsSocks ? (jumpers * PRICING_CONFIG.socks) : 0;
     return {
       subtotal,
       socksTotal,
       total: subtotal + socksTotal
     };
-  }, [bookingType, duration, jumpers, needsSocks, sockPairs]);
+  }, [bookingType, duration, jumpers, needsSocks]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -205,7 +204,7 @@ export default function BookingSystem() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     alert("Booking Submitted! (Mock) - This is where we'd connect to Stripe/Backend.");
-    console.log("Final Booking State:", { bookingType, duration, date, time, jumpers, needsSocks, sockPairs, formData, totals });
+    console.log("Final Booking State:", { bookingType, duration, date, time, jumpers, needsSocks, formData, totals });
   };
 
   return (
@@ -346,7 +345,6 @@ export default function BookingSystem() {
                         onClick={() => {
                           const newVal = Math.max(1, jumpers - 1);
                           setJumpers(newVal);
-                          if (sockPairs > newVal) setSockPairs(newVal);
                         }}
                         className="w-12 h-12 rounded-full border-2 border-white/10 hover:border-accent text-2xl font-bold transition-all"
                       >-</button>
@@ -368,28 +366,7 @@ export default function BookingSystem() {
                         <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${needsSocks ? 'left-7' : 'left-1'}`}></div>
                       </button>
                     </div>
-                    <p className="text-xs text-gray-500 mb-4">{t.socksDesc}</p>
-                    
-                    <AnimatePresence>
-                      {needsSocks && (
-                        <motion.div 
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                        >
-                          <label className="block text-[10px] font-black uppercase text-gray-500 mb-2 tracking-widest">Pairs Needed</label>
-                          <select 
-                            value={sockPairs}
-                            onChange={(e) => setSockPairs(parseInt(e.target.value))}
-                            className="w-full bg-black border border-white/20 rounded-lg px-3 py-2 text-sm outline-none focus:border-secondary transition-all"
-                          >
-                            {[...Array(jumpers)].map((_, i) => (
-                              <option key={i+1} value={i+1}>{i+1} Pair{i > 0 ? 's' : ''}</option>
-                            ))}
-                          </select>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                    <p className="text-xs text-gray-500 mb-0">{t.socksDesc}</p>
                 </div>
               </div>
             </div>
