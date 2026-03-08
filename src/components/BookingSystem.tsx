@@ -117,6 +117,7 @@ export default function BookingSystem() {
   const [time, setTime] = useState<string>('');
   const [jumpers, setJumpers] = useState<number>(1);
   const [needsSocks, setNeedsSocks] = useState<boolean>(true);
+  const [sockPairs, setSockPairs] = useState<number>(1);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -131,17 +132,42 @@ export default function BookingSystem() {
   const timeSlots = useMemo(() => {
     const d = new Date(date);
     const day = d.getDay();
+    
+    // Toddler Time specific hours: 10AM - 3PM
+    if (bookingType === 'toddler') {
+      const slots = [];
+      for (let h = 10; h < 15; h++) {
+        slots.push(`${h}:00 AM`);
+        slots.push(`${h}:30 AM`);
+      }
+      return slots;
+    }
+
     let hours = OPERATING_HOURS.monThu;
     if (day === 0) hours = OPERATING_HOURS.sun;
     else if (day === 5 || day === 6) hours = OPERATING_HOURS.friSat;
 
     const slots = [];
     for (let h = hours.open; h < hours.close; h++) {
-      slots.push(`${h}:00 ${h >= 12 ? 'PM' : 'AM'}`);
-      slots.push(`${h}:30 ${h >= 12 ? 'PM' : 'AM'}`);
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      const displayH = h > 12 ? h - 12 : h;
+      slots.push(`${displayH}:00 ${ampm}`);
+      slots.push(`${displayH}:30 ${ampm}`);
     }
     return slots;
-  }, [date]);
+  }, [date, bookingType]);
+
+  // Logic: Generate duration options (5 min increments for Toddler)
+  const durationOptions = useMemo(() => {
+    if (bookingType === 'toddler') {
+      const options = [];
+      for (let m = 60; m <= 180; m += 5) {
+        options.push(m.toString());
+      }
+      return options;
+    }
+    return ['60', '90', '120', '180'];
+  }, [bookingType]);
 
   // Logic: Calculate Summary
   const totals = useMemo(() => {
@@ -153,7 +179,10 @@ export default function BookingSystem() {
       }
     } else {
       const priceKey = bookingType === 'toddler' ? 'toddler' : 'general';
-      const perPerson = (PRICING_CONFIG as any)[priceKey][duration] || 0;
+      const pricingObj = (PRICING_CONFIG as any)[priceKey];
+      
+      // For toddler 5-min increments, we'll extrapolate the 60-min rate
+      let perPerson = pricingObj[duration] || (pricingObj['60'] * (parseInt(duration) / 60));
       subtotal = perPerson * jumpers;
       
       if (bookingType === 'group' && jumpers >= PRICING_CONFIG.group.minJumpers) {
@@ -161,13 +190,13 @@ export default function BookingSystem() {
       }
     }
 
-    const socksTotal = needsSocks ? (jumpers * PRICING_CONFIG.socks) : 0;
+    const socksTotal = needsSocks ? (sockPairs * PRICING_CONFIG.socks) : 0;
     return {
       subtotal,
       socksTotal,
       total: subtotal + socksTotal
     };
-  }, [bookingType, duration, jumpers, needsSocks]);
+  }, [bookingType, duration, jumpers, needsSocks, sockPairs]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -176,7 +205,7 @@ export default function BookingSystem() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     alert("Booking Submitted! (Mock) - This is where we'd connect to Stripe/Backend.");
-    console.log("Final Booking State:", { bookingType, duration, date, time, jumpers, needsSocks, formData, totals });
+    console.log("Final Booking State:", { bookingType, duration, date, time, jumpers, needsSocks, sockPairs, formData, totals });
   };
 
   return (
@@ -202,6 +231,11 @@ export default function BookingSystem() {
            <span className="bg-secondary/20 text-secondary px-3 py-1 rounded-md">🕒 10AM - 9PM</span>
            <span className="bg-accent/20 text-accent px-3 py-1 rounded-md">📝 {t.waiverReminder}</span>
         </div>
+        {bookingType === 'toddler' && (
+          <div className="mt-4 animate-bounce inline-block bg-secondary/10 border border-secondary/20 px-4 py-2 rounded-full text-secondary text-xs font-bold uppercase tracking-widest">
+            🐣 Toddler Time Special: 10AM - 3PM
+          </div>
+        )}
       </section>
 
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -226,7 +260,8 @@ export default function BookingSystem() {
                   onClick={() => {
                     setBookingType(type.id as BookingType);
                     if (type.id === 'party') setDuration('120');
-                    if (type.id === 'toddler' && duration === '180') setDuration('120');
+                    else setDuration('90');
+                    setTime('');
                   }}
                   className={`text-left p-6 rounded-3xl border-2 transition-all relative group ${
                     bookingType === type.id 
@@ -270,10 +305,9 @@ export default function BookingSystem() {
                     onChange={(e) => setDuration(e.target.value)}
                     className="w-full bg-black/50 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-secondary transition-all outline-none appearance-none"
                   >
-                    <option value="60">60 {t.minutes}</option>
-                    <option value="90">90 {t.minutes}</option>
-                    <option value="120">120 {t.minutes}</option>
-                    {bookingType !== 'toddler' && <option value="180">180 {t.minutes}</option>}
+                    {durationOptions.map(opt => (
+                      <option key={opt} value={opt}>{opt} {t.minutes}</option>
+                    ))}
                   </select>
                 </div>
               ) : (
@@ -297,42 +331,70 @@ export default function BookingSystem() {
             </div>
           </section>
 
-          {/* STEP 3: JUMPERS */}
+          {/* STEP 3: JUMPERS & SOCKS */}
           <section className="animate-in slide-in-from-bottom duration-1000">
             <h2 className="text-2xl font-bold mb-6 flex items-center text-accent">
               <span className="w-8 h-8 bg-accent text-white rounded-full flex items-center justify-center text-sm mr-3 font-black">3</span>
               {t.step3}
             </h2>
-            <div className="bg-white/5 p-8 rounded-[2rem] border border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-8">
-               <div className="flex-1">
-                  <label className="block text-xs font-black uppercase text-gray-500 mb-4 tracking-widest">{t.jumpers}</label>
-                  <div className="flex items-center space-x-6">
-                     <button 
-                       onClick={() => setJumpers(Math.max(1, jumpers - 1))}
-                       className="w-12 h-12 rounded-full border-2 border-white/10 hover:border-accent text-2xl font-bold transition-all"
-                     >-</button>
-                     <span className="text-4xl font-black italic text-accent">{jumpers}</span>
-                     <button 
-                       onClick={() => setJumpers(jumpers + 1)}
-                       className="w-12 h-12 rounded-full border-2 border-white/10 hover:border-accent text-2xl font-bold transition-all"
-                     >+</button>
-                  </div>
-               </div>
+            <div className="space-y-6">
+              <div className="bg-white/5 p-8 rounded-[2rem] border border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-8">
+                <div className="flex-1">
+                    <label className="block text-xs font-black uppercase text-gray-500 mb-4 tracking-widest">{t.jumpers}</label>
+                    <div className="flex items-center space-x-6">
+                      <button 
+                        onClick={() => {
+                          const newVal = Math.max(1, jumpers - 1);
+                          setJumpers(newVal);
+                          if (sockPairs > newVal) setSockPairs(newVal);
+                        }}
+                        className="w-12 h-12 rounded-full border-2 border-white/10 hover:border-accent text-2xl font-bold transition-all"
+                      >-</button>
+                      <span className="text-4xl font-black italic text-accent">{jumpers}</span>
+                      <button 
+                        onClick={() => setJumpers(jumpers + 1)}
+                        className="w-12 h-12 rounded-full border-2 border-white/10 hover:border-accent text-2xl font-bold transition-all"
+                      >+</button>
+                    </div>
+                </div>
 
-               <div className="flex-1 bg-black/30 p-6 rounded-2xl border border-white/5">
-                  <div className="flex items-center justify-between mb-2">
-                    <label className="font-bold text-sm">{t.addSocks}</label>
-                    <button 
-                      onClick={() => setNeedsSocks(!needsSocks)}
-                      className={`w-12 h-6 rounded-full transition-all relative ${needsSocks ? 'bg-secondary' : 'bg-white/10'}`}
-                    >
-                      <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${needsSocks ? 'left-7' : 'left-1'}`}></div>
-                    </button>
-                  </div>
-                  <p className="text-xs text-gray-500">{t.socksDesc}</p>
-               </div>
+                <div className="flex-1 bg-black/30 p-6 rounded-2xl border border-white/5">
+                    <div className="flex items-center justify-between mb-2">
+                      <label className="font-bold text-sm">{t.addSocks}</label>
+                      <button 
+                        onClick={() => setNeedsSocks(!needsSocks)}
+                        className={`w-12 h-6 rounded-full transition-all relative ${needsSocks ? 'bg-secondary' : 'bg-white/10'}`}
+                      >
+                        <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${needsSocks ? 'left-7' : 'left-1'}`}></div>
+                      </button>
+                    </div>
+                    <p className="text-xs text-gray-500 mb-4">{t.socksDesc}</p>
+                    
+                    <AnimatePresence>
+                      {needsSocks && (
+                        <motion.div 
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                        >
+                          <label className="block text-[10px] font-black uppercase text-gray-500 mb-2 tracking-widest">Pairs Needed</label>
+                          <select 
+                            value={sockPairs}
+                            onChange={(e) => setSockPairs(parseInt(e.target.value))}
+                            className="w-full bg-black border border-white/20 rounded-lg px-3 py-2 text-sm outline-none focus:border-secondary transition-all"
+                          >
+                            {[...Array(jumpers)].map((_, i) => (
+                              <option key={i+1} value={i+1}>{i+1} Pair{i > 0 ? 's' : ''}</option>
+                            ))}
+                          </select>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                </div>
+              </div>
             </div>
           </section>
+
 
           {/* STEP 4: CONTACT INFO */}
           <section>
