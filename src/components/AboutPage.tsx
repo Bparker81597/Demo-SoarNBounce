@@ -288,15 +288,25 @@ const PartySection = ({ t }: { t: any }) => (
   </section>
 );
 
-const ComingSoonSection = ({ t }: { t: any }) => (
+import { LOCATIONS } from '../data/locations';
+
+// ... [TRANSLATIONS stay the same] ...
+
+const LocationsSection = ({ t }: { t: any }) => (
   <section className="py-32 px-6 max-w-7xl mx-auto text-center">
-    <h2 className="text-5xl md:text-8xl font-black italic font-headings uppercase tracking-tighter mb-20 text-slate-900 dark:text-white underline decoration-primary/20 underline-offset-8">{t.comingSoon}</h2>
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-      {['Clarksville, IN', 'Flint, MI', 'Kalamazoo, MI', 'Burnsville, MN', 'Matteson, IL', 'Peoria, IL', 'Portage, IN', 'South Bend, IN', 'Elkhart, lN', 'Springfield, VA', 'Racine, WI', 'Bloomfield, NJ', 'Westbury, NY', 'Memphis, TN'].map((loc, i) => (
-        <div key={i} className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-10 rounded-[3rem] flex flex-col justify-center items-center group hover:border-primary shadow-xl hover:shadow-2xl transition-all duration-500">
-           <span className="text-primary opacity-40 mb-3 font-black italic text-[10px] tracking-[0.3em]">NEW HUB</span>
-           <p className="font-black uppercase tracking-tighter text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors text-lg italic">{loc}</p>
-        </div>
+    <h2 className="text-5xl md:text-8xl font-black italic font-headings uppercase tracking-tighter mb-20 text-slate-900 dark:text-white underline decoration-primary/20 underline-offset-8">Our Parks</h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      {LOCATIONS.map((loc, i) => (
+        <a 
+          key={i} 
+          href={`${SITE_BASE}/${loc.slug}`}
+          className="bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 p-10 rounded-[3rem] flex flex-col justify-center items-center group hover:border-primary shadow-xl hover:shadow-2xl transition-all duration-500"
+        >
+           <span className={`opacity-40 mb-3 font-black italic text-[10px] tracking-[0.3em] uppercase ${loc.status === 'open' ? 'text-emerald-500' : 'text-primary'}`}>
+             {loc.status === 'open' ? 'Now Open' : 'Coming Soon'}
+           </span>
+           <p className="font-black uppercase tracking-tighter text-slate-700 dark:text-slate-300 group-hover:text-primary transition-colors text-lg italic">{loc.city}, {loc.state}</p>
+        </a>
       ))}
     </div>
   </section>
@@ -328,7 +338,7 @@ export default function AboutPage() {
       <PricingSection t={t} />
       <LocationHoursSection t={t} />
       <PartySection t={t} />
-      <ComingSoonSection t={t} />
+      <LocationsSection t={t} />
       
       {/* FINAL CALL TO ACTION */}
       <section className="py-40 px-6 text-center bg-primary relative overflow-hidden">
