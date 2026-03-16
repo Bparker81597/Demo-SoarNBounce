@@ -104,25 +104,26 @@ function LocationCard({ loc }: { loc: LocationConfig }) {
         </div>
 
         <div className="flex flex-col gap-4">
-          {isOpen ? (
-            <>
-              <a href={`${SITE_BASE}/${loc.slug}`} className="bg-primary hover:bg-blue-600 text-white text-center font-black uppercase py-4 rounded-2xl transition-all shadow-lg italic tracking-widest text-xs">
-                View Park
-              </a>
-              <div className="grid grid-cols-2 gap-3">
+          <a href={`${SITE_BASE}/${loc.slug}`} className={`text-center font-black uppercase py-4 rounded-2xl transition-all shadow-lg italic tracking-widest text-xs ${isOpen ? 'bg-primary hover:bg-blue-600 text-white' : 'bg-slate-800 hover:bg-slate-700 text-white'}`}>
+            {isOpen ? 'View Park' : 'Preview Park'}
+          </a>
+          
+          <div className="grid grid-cols-2 gap-3">
+            {isOpen ? (
+              <>
                 <a href={`${SITE_BASE}/${loc.slug}/book`} className="bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-center font-black uppercase py-3 rounded-xl transition-all italic tracking-widest text-[9px]">
                   Tickets
                 </a>
                 <a href={`${SITE_BASE}/${loc.slug}/waiver`} className="bg-orange-500 text-white text-center font-black uppercase py-3 rounded-xl transition-all italic tracking-widest text-[9px]">
                   Waiver
                 </a>
+              </>
+            ) : (
+              <div className="col-span-2 bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-600 text-center font-black uppercase py-3 rounded-xl italic tracking-widest text-[9px]">
+                Coming Soon
               </div>
-            </>
-          ) : (
-            <button className="bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-600 cursor-not-allowed font-black uppercase py-4 rounded-2xl italic tracking-widest text-xs">
-              Coming Soon
-            </button>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </motion.div>

@@ -4,7 +4,7 @@ import WaiverSystem from '../../components/WaiverSystem';
 import { LOCATIONS } from '../../data/locations';
 
 export function getStaticPaths() {
-  return LOCATIONS.filter(loc => loc.status === 'open').map((loc) => ({
+  return LOCATIONS.map((loc) => ({
     params: { location: loc.slug },
     props: { locationConfig: loc },
   }));
