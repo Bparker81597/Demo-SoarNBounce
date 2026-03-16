@@ -1,0 +1,18 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import WaiverSystem from '../../components/WaiverSystem';
+import { LOCATIONS } from '../../data/locations';
+
+export function getStaticPaths() {
+  return LOCATIONS.filter(loc => loc.status === 'open').map((loc) => ({
+    params: { location: loc.slug },
+    props: { locationConfig: loc },
+  }));
+}
+
+const { locationConfig } = Astro.props;
+---
+
+<Layout title={`Sign Waiver | ${locationConfig.name}`}>
+  <WaiverSystem location={locationConfig} client:load />
+</Layout>

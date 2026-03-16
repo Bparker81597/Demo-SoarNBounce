@@ -1,11 +1,21 @@
 ---
 import ThemeToggle from '../components/ThemeToggle';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 
 interface Props {
   title: string;
 }
 
 const { title } = Astro.props;
+const pathname = new URL(Astro.url).pathname;
+const SITE_BASE = "/Demo-SoarNBounce";
+
+// Helper to check if a link is active
+const isActive = (path: string) => {
+  const normalizedPath = path.endsWith('/') ? path : `${path}/`;
+  const normalizedPathname = pathname.endsWith('/') ? pathname : `${pathname}/`;
+  return normalizedPathname === normalizedPath;
+};
 ---
 
 <!doctype html>
@@ -18,7 +28,7 @@ const { title } = Astro.props;
     <title>{title}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@700;800&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:ital,wght@0,900;1,900&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
     <script is:inline>
       const getTheme = () => {
         if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
@@ -40,11 +50,11 @@ const { title } = Astro.props;
     <style is:global>
       :root {
         --color-primary: #0070f3;
-        --color-secondary: #2ecc12; /* Darker green for better light mode contrast */
-        --color-accent: #f97316; /* Standardized Orange */
+        --color-secondary: #2ecc12;
+        --color-accent: #f97316;
       }
       .dark {
-        --color-secondary: #39ff14; /* Brighter neon for dark mode */
+        --color-secondary: #39ff14;
       }
       body {
         margin: 0;
@@ -53,110 +63,94 @@ const { title } = Astro.props;
       .font-headings {
         font-family: 'Poppins', 'Montserrat', sans-serif;
       }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 5px;
+      }
+      .dark ::-webkit-scrollbar-thumb {
+        background: #334155;
+      }
     </style>
   </head>
-  <body class="font-sans antialiased text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-[#020617] transition-colors duration-500">
+  <body class="font-sans antialiased text-slate-900 dark:text-slate-100 bg-slate-50 dark:bg-[#020617] transition-colors duration-500 selection:bg-primary/30">
     <!-- Desktop Navigation -->
-    <header class="fixed top-0 w-full z-50 bg-white/90 dark:bg-slate-950/90 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 hidden md:block shadow-sm">
+    <header class="fixed top-0 w-full z-[100] bg-white/70 dark:bg-slate-950/70 backdrop-blur-xl border-b border-slate-200/50 dark:border-slate-800/50 hidden md:block shadow-sm">
       <nav class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <a href="/Demo-SoarNBounce/" class="text-2xl font-headings font-black italic text-primary tracking-tighter">
-          SOAR <span class="text-orange-500 dark:text-orange-400">'N</span> BOUNCE
+        <a href={SITE_BASE} class="group flex items-center gap-3">
+          <div class="bg-primary p-2.5 rounded-2xl group-hover:rotate-12 transition-transform shadow-lg shadow-primary/20">
+             <span class="text-white text-2xl font-black italic">S</span>
+          </div>
+          <span class="font-black italic text-2xl tracking-tighter uppercase text-slate-900 dark:text-white group-hover:text-primary transition-all">
+            Soar <span class="text-orange-500">'N</span> Bounce
+          </span>
         </a>
         
-        <div class="hidden md:flex items-center space-x-8 text-slate-600 dark:text-slate-400">
-          <a href="/Demo-SoarNBounce/" class="hover:text-primary dark:hover:text-white transition-colors font-bold uppercase text-xs tracking-widest">Home</a>
-          <a href="/Demo-SoarNBounce/about" class="hover:text-primary dark:hover:text-white transition-colors font-bold uppercase text-xs tracking-widest">About</a>
-          <a href="/Demo-SoarNBounce/attractions" class="hover:text-primary dark:hover:text-white transition-colors font-bold uppercase text-xs tracking-widest">Attractions</a>
-          <a href="/Demo-SoarNBounce/parties" class="hover:text-primary dark:hover:text-white transition-colors font-bold uppercase text-xs tracking-widest">Parties</a>
-          <a href="/Demo-SoarNBounce/pricing" class="hover:text-primary dark:hover:text-white transition-colors font-bold uppercase text-xs tracking-widest">Pricing</a>
-          <a href="/Demo-SoarNBounce/waiver" class="hover:text-primary dark:hover:text-white transition-colors font-bold uppercase text-xs tracking-widest">Waiver</a>
+        <div class="hidden lg:flex items-center space-x-2 text-slate-600 dark:text-slate-400">
+          {[
+            { label: 'Parks', href: `${SITE_BASE}/` },
+            { label: 'About', href: `${SITE_BASE}/about` }
+          ].map((link) => (
+            <a 
+              href={link.href} 
+              class={`px-5 py-2 rounded-xl transition-all font-black uppercase text-[10px] tracking-[0.2em] italic relative group ${isActive(link.href) ? 'text-primary bg-primary/5' : 'hover:text-primary hover:bg-slate-100 dark:hover:bg-slate-900'}`}
+            >
+              {link.label}
+              {isActive(link.href) && <span class="absolute bottom-1 left-5 right-5 h-0.5 bg-primary rounded-full"></span>}
+            </a>
+          ))}
+          
+          <div class="h-4 w-[1px] bg-slate-200 dark:border-slate-800 mx-2"></div>
+          
+          <a href={`${SITE_BASE}/#attractions`} class="px-5 py-2 hover:text-primary transition-all font-black uppercase text-[10px] tracking-[0.2em] italic">Attractions</a>
+          <a href={`${SITE_BASE}/#parties`} class="px-5 py-2 hover:text-orange-500 transition-all font-black uppercase text-[10px] tracking-[0.2em] italic">Parties</a>
+          <a href={`${SITE_BASE}/#pricing`} class="px-5 py-2 hover:text-emerald-500 transition-all font-black uppercase text-[10px] tracking-[0.2em] italic">Pricing</a>
         </div>
 
-        <div class="flex items-center space-x-6">
-          <ThemeToggle client:load />
-          <a href="/Demo-SoarNBounce/book" class="bg-primary hover:bg-blue-600 text-white px-8 py-2.5 rounded-full font-black transition-all shadow-lg shadow-primary/20 italic uppercase text-xs tracking-widest">
-            Book Now
+        <div class="flex items-center space-x-4">
+          <div class="flex items-center bg-slate-100/50 dark:bg-slate-900/50 p-1 rounded-2xl border border-slate-200/50 dark:border-slate-800/50">
+            <LanguageSwitcher client:load />
+            <ThemeToggle client:load />
+          </div>
+          <a href={`${SITE_BASE}/grandville/book`} class="bg-primary hover:bg-blue-600 text-white px-8 py-3 rounded-2xl font-black transition-all shadow-xl shadow-primary/20 italic uppercase text-[10px] tracking-widest active:scale-95">
+            Tickets
           </a>
         </div>
       </nav>
     </header>
 
-    <!-- Sticky CTAs -->
-    <div class="fixed right-6 bottom-24 z-40 flex flex-col space-y-4 hidden md:flex">
-      <a href="/Demo-SoarNBounce/book" class="bg-primary hover:scale-110 transition-transform p-4 rounded-2xl shadow-2xl group relative text-white">
-         <span class="absolute right-full mr-4 bg-slate-900 text-white px-3 py-1.5 rounded-lg text-[10px] opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-black uppercase tracking-widest">Book Jump</span>
-         🚀
-      </a>
-      <a href="/Demo-SoarNBounce/parties" class="bg-orange-500 hover:scale-110 transition-transform p-4 rounded-2xl shadow-2xl group relative text-white">
-         <span class="absolute right-full mr-4 bg-slate-900 text-white px-3 py-1.5 rounded-lg text-[10px] opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-black uppercase tracking-widest">Book Party</span>
-         🎂
-      </a>
-      <a href="/Demo-SoarNBounce/waiver" class="bg-emerald-500 hover:scale-110 transition-transform p-4 rounded-2xl shadow-2xl group relative text-white">
-         <span class="absolute right-full mr-4 bg-slate-900 text-white px-3 py-1.5 rounded-lg text-[10px] opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap font-black uppercase tracking-widest">Sign Waiver</span>
-         ✍️
-      </a>
-    </div>
-
-    <main class="pb-24 md:pb-0 md:pt-20">
-      <slot />
-    </main>
-
     <!-- Mobile Navigation -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800 md:hidden z-50 flex justify-around items-center py-4 px-2 shadow-[0_-4px_30px_rgba(0,0,0,0.1)]">
-      <a href="/Demo-SoarNBounce/" class="flex flex-col items-center space-y-1">
-        <span class="text-xl opacity-70 dark:opacity-100">🏠</span>
-        <span class="text-[9px] uppercase font-black text-slate-400 dark:text-slate-500 tracking-tighter">Home</span>
+    <nav class="fixed bottom-0 left-0 right-0 bg-white/80 dark:bg-slate-950/80 backdrop-blur-2xl border-t border-slate-200/50 dark:border-slate-800/50 md:hidden z-50 flex justify-around items-center py-4 px-2 shadow-[0_-10px_40px_rgba(0,0,0,0.1)]">
+      <a href={SITE_BASE} class={`flex flex-col items-center space-y-1 transition-all ${isActive(SITE_BASE) ? 'text-primary scale-110' : 'text-slate-400 opacity-70'}`}>
+        <span class="text-xl">🏠</span>
+        <span class="text-[9px] uppercase font-black tracking-tighter italic">Parks</span>
       </a>
-      <a href="/Demo-SoarNBounce/book" class="flex flex-col items-center space-y-1">
+      <a href={`${SITE_BASE}/grandville/book`} class="flex flex-col items-center space-y-1 text-slate-400 opacity-70 hover:text-primary transition-all">
         <span class="text-xl">🎟️</span>
-        <span class="text-[9px] uppercase font-black text-primary tracking-tighter">Book</span>
+        <span class="text-[9px] uppercase font-black tracking-tighter italic">Book</span>
       </a>
-      <div class="flex flex-col items-center justify-center -mt-4 bg-white dark:bg-slate-900 p-2 rounded-full shadow-lg border border-slate-100 dark:border-slate-800">
+      <div class="flex flex-col items-center justify-center -mt-8 bg-white dark:bg-slate-900 p-3 rounded-full shadow-2xl border-4 border-slate-50 dark:border-[#020617] gap-3">
+         <LanguageSwitcher client:load />
          <ThemeToggle client:load />
       </div>
-      <a href="/Demo-SoarNBounce/pricing" class="flex flex-col items-center space-y-1">
-        <span class="text-xl opacity-70 dark:opacity-100">⏰</span>
-        <span class="text-[9px] uppercase font-black text-slate-400 dark:text-slate-500 tracking-tighter">Hours</span>
+      <a href={`${SITE_BASE}/about`} class={`flex flex-col items-center space-y-1 transition-all ${isActive(`${SITE_BASE}/about`) ? 'text-primary scale-110' : 'text-slate-400 opacity-70'}`}>
+        <span class="text-xl">ℹ️</span>
+        <span class="text-[9px] uppercase font-black tracking-tighter italic">About</span>
       </a>
-      <a href="/Demo-SoarNBounce/waiver" class="flex flex-col items-center space-y-1">
-        <span class="text-xl opacity-70 dark:opacity-100">🖊️</span>
-        <span class="text-[9px] uppercase font-black text-slate-400 dark:text-slate-500 tracking-tighter">Waiver</span>
+      <a href={`${SITE_BASE}/grandville/waiver`} class="flex flex-col items-center space-y-1 text-slate-400 opacity-70 hover:text-primary transition-all">
+        <span class="text-xl">🖊️</span>
+        <span class="text-[9px] uppercase font-black tracking-tighter italic">Waiver</span>
       </a>
     </nav>
 
-    <footer class="bg-white dark:bg-slate-950 py-20 px-6 mt-12 border-t border-slate-200 dark:border-slate-900">
-      <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16 text-slate-600 dark:text-slate-400">
-        <div>
-           <h3 class="text-2xl font-headings font-black text-primary mb-8 italic tracking-tighter uppercase">SOAR <span class="text-orange-500">'N</span> BOUNCE</h3>
-           <p class="max-w-sm font-bold leading-relaxed text-sm">The ultimate trampoline park for high-energy fun and unforgettable birthday celebrations in Grandville, MI.</p>
-        </div>
-        <div>
-           <h4 class="font-black text-[10px] mb-8 text-slate-400 dark:text-slate-600 uppercase tracking-[0.3em]">Quick Hours</h4>
-           <ul class="space-y-4 font-bold text-sm">
-             <li class="flex justify-between border-b border-slate-100 dark:border-slate-900 pb-2"><span>Mon - Thu:</span> <span class="text-slate-900 dark:text-slate-200">10AM - 8PM</span></li>
-             <li class="flex justify-between text-primary italic border-b border-slate-100 dark:border-slate-900 pb-2"><span>Fri - Sat:</span> <span class="text-slate-900 dark:text-slate-200 uppercase tracking-tighter">10AM - 10PM</span></li>
-             <li class="flex justify-between"><span>Sun:</span> <span class="text-slate-900 dark:text-slate-200">11AM - 7PM</span></li>
-           </ul>
-        </div>
-        <div>
-           <h4 class="font-black text-[10px] mb-8 text-slate-400 dark:text-slate-600 uppercase tracking-[0.3em]">The Location</h4>
-           <p class="font-black leading-relaxed mb-6 text-slate-900 dark:text-slate-200 text-lg tracking-tight">
-             3668 Rivertown Pkwy SW<br/>
-             Grandville, MI 49418
-           </p>
-           <a href="https://maps.google.com" target="_blank" class="text-primary hover:text-blue-600 transition-colors font-black italic uppercase text-xs tracking-[0.2em] flex items-center gap-2">
-             Open in Google Maps <span class="text-lg">→</span>
-           </a>
-        </div>
-      </div>
-      <div class="max-w-7xl mx-auto pt-12 mt-12 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center text-[10px] font-black uppercase tracking-widest text-slate-400">
-         <p>&copy; 2026 Soar N Bounce. All rights reserved.</p>
-         <div class="flex space-x-6 mt-4 md:mt-0">
-           <a href="#" class="hover:text-primary transition-colors">Facebook</a>
-           <a href="#" class="hover:text-primary transition-colors">Instagram</a>
-           <a href="#" class="hover:text-primary transition-colors">TikTok</a>
-         </div>
-      </div>
-    </footer>
+    <main class="pb-24 md:pb-0 md:pt-0">
+      <slot />
+    </main>
   </body>
 </html>

@@ -1,8 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import LandingPage from '../components/LandingPage';
+import LocationPicker from '../components/locations/LocationPicker';
+import { LOCATIONS } from '../data/locations';
 ---
 
-<Layout title="Soar N Bounce Grandville | Jump Into the Fun">
-  <LandingPage client:load />
+<Layout title="Soar N Bounce | Trampoline & Adventure Park">
+  <LocationPicker locations={LOCATIONS} client:load />
 </Layout>

@@ -1,0 +1,18 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BookingSystem from '../../components/BookingSystem';
+import { LOCATIONS } from '../../data/locations';
+
+export function getStaticPaths() {
+  return LOCATIONS.filter(loc => loc.status === 'open').map((loc) => ({
+    params: { location: loc.slug },
+    props: { locationConfig: loc },
+  }));
+}
+
+const { locationConfig } = Astro.props;
+---
+
+<Layout title={`Book Tickets | ${locationConfig.name}`}>
+  <BookingSystem location={locationConfig} client:load />
+</Layout>

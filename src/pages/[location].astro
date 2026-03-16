@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+import LandingPage from '../components/LandingPage';
+import { LOCATIONS } from '../data/locations';
+
+export function getStaticPaths() {
+  return LOCATIONS.map((loc) => ({
+    params: { location: loc.slug },
+    props: { locationConfig: loc },
+  }));
+}
+
+const { locationConfig } = Astro.props;
+---
+
+<Layout title={`${locationConfig.name} | Jump Into the Fun`}>
+  <LandingPage location={locationConfig} client:load />
+</Layout>
