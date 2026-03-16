@@ -49,15 +49,10 @@ export const LOCATIONS: LocationConfig[] = [
     name: "Soar N Bounce Grandville",
     city: "Grandville",
     state: "MI",
-    address: "3668 Rivertown Parkway, Grandville, MI 49418",
-    phones: ["(616) 208-1111"],
+    address: "3668 Rivertown Pkwy SW, Grandville, MI 49418",
+    phones: ["(616) 215-0999"],
     email: "grandville@soarnbounce.com",
-    hours: {
-      monThu: "10AM – 9PM",
-      friSat: "10AM – 10PM",
-      sun: "10AM – 9PM",
-      note: "Weekend hours may be affected by private events."
-    },
+    hours: DEFAULT_HOURS,
     pricing: DEFAULT_PRICING,
     links: {
       booking: "https://lilypadpos.app/soarnbouncegr/onlinebooking/index.php",
@@ -68,12 +63,66 @@ export const LOCATIONS: LocationConfig[] = [
     status: "open"
   },
   {
+    slug: "muskegon",
+    name: "Soar N Bounce Muskegon",
+    city: "Muskegon",
+    state: "MI",
+    address: "5580 Harvey Street, Muskegon, MI 49444",
+    phones: ["(231) 221-2388"],
+    email: "muskegon@soarnbounce.com",
+    hours: DEFAULT_HOURS,
+    pricing: DEFAULT_PRICING,
+    links: {
+      booking: "https://lilypadpos.app/soarnbouncemk/onlinebooking/index.php",
+      waiver: "https://lilypadpos.app/soarnbouncemk/onlinewaiver/waiver.php",
+      parties: "#parties",
+      info: "#attractions"
+    },
+    status: "open"
+  },
+  {
+    slug: "temple",
+    name: "Soar N Bounce Temple",
+    city: "Temple",
+    state: "PA",
+    address: "5370 Allentown Pike, Temple, PA 19560",
+    phones: ["(610) 403-9188"],
+    email: "temple@soarnbounce.com",
+    hours: DEFAULT_HOURS,
+    pricing: DEFAULT_PRICING,
+    links: {
+      booking: "https://lilypadpos.app/soarnbouncete/onlinebooking/index.php",
+      waiver: "https://lilypadpos.app/soarnbouncete/onlinewaiver/waiver.php",
+      parties: "#parties",
+      info: "#attractions"
+    },
+    status: "open"
+  },
+  {
+    slug: "davenport",
+    name: "Soar N Bounce Davenport",
+    city: "Davenport",
+    state: "IA",
+    address: "902 W Kimberly Rd, Davenport, IA 52806",
+    phones: ["(563) 217-1617"],
+    email: "davenport@soarnbounce.com",
+    hours: DEFAULT_HOURS,
+    pricing: DEFAULT_PRICING,
+    links: {
+      booking: "https://lilypadpos.app/soarnbouncedv/onlinebooking/index.php",
+      waiver: "https://lilypadpos.app/soarnbouncedv/onlinewaiver/waiver.php",
+      parties: "#parties",
+      info: "#attractions"
+    },
+    status: "open"
+  },
+  {
     slug: "clarksville",
     name: "Soar N Bounce Clarksville",
     city: "Clarksville",
     state: "IN",
-    address: "Coming Soon to Clarksville, IN",
-    phones: ["(800) SOAR-NOW"],
+    address: "945 E Lewis and Clark Pkwy, Clarksville, IN 47129",
+    phones: ["(812) 269-5689"],
     email: "clarksville@soarnbounce.com",
     hours: DEFAULT_HOURS,
     pricing: DEFAULT_PRICING,
